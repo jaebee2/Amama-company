@@ -18,67 +18,62 @@
     </ul>
 </nav>
 <body>
-    <body>
-        <div class="container">
-            <h2>Sachet Water Daily Production Entry</h2>
-            <form id="recordForm">
-                <!-- Table 1: Title of Sachet Water Daily Production -->
-                <h3>Table 1: Title of Sachet Water Daily Production</h3>
-                <table>
-                    <tr>
-                        <td><label for="productionDate">Date:</label></td>
-                        <td><input type="date" id="productionDate" name="productionDate" required></td>
-                    </tr>
-                    <tr>
-                        <td><label for="roll">Roll (in kg):</label></td>
-                        <td><input type="number" id="roll" name="roll" required></td>
-                    </tr>
-                    <tr>
-                        <td><label for="operatorName">Operator Name:</label></td>
-                        <td><input type="text" id="operatorName" name="operatorName" required></td>
-                    </tr>
-                    <tr>
-                        <td><label for="bagsProduced">Number of Bags Produced:</label></td>
-                        <td><input type="number" id="bagsProduced" name="bagsProduced" required></td>
-                    </tr>
-                    <tr>
-                        <td><label for="rateAmount">Rate Amount (in ₦):</label></td>
-                        <td><input type="number" id="rateAmount" name="rateAmount" required></td>
-                    </tr>
-                </table>
-    
-                <!-- Table 2: Additional Information (if needed) -->
-                <h3>Table 2: Additional Information (if needed)</h3>
-                <table>
-                    <tr>
-                        <td><label for="productionDate">Date:</label></td>
-                        <td><input type="date" id="productionDate" name="productionDate" required></td>
-                    </tr>
-                    <tr>
-                        <td><label for="roll">Roll (in kg):</label></td>
-                        <td><input type="number" id="roll" name="roll" required></td>
-                    </tr>
-                    <tr>
-                        <td><label for="operatorName">Operator Name:</label></td>
-                        <td><input type="text" id="operatorName" name="operatorName" required></td>
-                    </tr>
-                    <tr>
-                        <td><label for="bagsProduced">Number of Bags Produced:</label></td>
-                        <td><input type="number" id="bagsProduced" name="bagsProduced" required></td>
-                    </tr>
-                    <tr>
-                        <td><label for="rateAmount">Rate Amount (in ₦):</label></td>
-                        <td><input type="number" id="rateAmount" name="rateAmount" required></td>
-                    </tr>
-                </table>
-    
-                <button type="submit">Submit</button>
-            </form>
-    
-            <div id="output"></div>
-        </div>
-    
-    <script src="script.js"></script>
+    <div class="container">
+        
+        <form id="recordForm">
+            <!-- Table 1: Title of Sachet Water Daily Production -->
+            <h3> Sachet Water Daily Production</h3>
+            <table>
+                <tr>
+                    <td><label for="productionDate">Date:</label></td>
+                    <td><input type="date" id="productionDate" name="productionDate" required></td>
+                </tr>
+                <tr>
+                    <td><label for="roll">Roll (in kg):</label></td>
+                    <td><input type="number" id="roll" name="roll" required></td>
+                </tr>
+                <tr>
+                    <td><label for="operatorName">Operator Name:</label></td>
+                    <td><input type="text" id="operatorName" name="operatorName" required></td>
+                </tr>
+                <tr>
+                    <td><label for="bagsProduced">Number of Bags Produced:</label></td>
+                    <td><input type="number" id="bagsProduced" name="bagsProduced" required></td>
+                </tr>
+                <tr>
+                    <td><label for="rateAmount">Rate Amount (in ₦):</label></td>
+                    <td><input type="number" id="rateAmount" name="rateAmount" required></td>
+                </tr>
+            </table>
+
+            
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="output"></div>
+    </div>
+
+    <script>document.getElementById("recordForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        var formData = new FormData(document.getElementById("recordForm"));
+        fetch('https://script.google.com/macros/s/AKfycbxi8X0qMKi6ValR7XG0xb5ObQvo1KBDTsjk3Xj7Yywpz_qNkVfl6iDAO6ZTfjwBMaUNDA/exec', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data === "Success") {
+                document.getElementById("output").textContent = "Record submitted successfully!";
+            } else {
+                document.getElementById("output").textContent = "Error submitting record.";
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById("output").textContent = "Error submitting record.";
+        });
+    });</script>
 </body>
 
 </html>
